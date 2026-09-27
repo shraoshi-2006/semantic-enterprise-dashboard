@@ -1,0 +1,49 @@
+<!-- Semantic Sidebar Component (<aside>) -->
+<aside class="site-sidebar" aria-label="Console Navigation Sidebar">
+  <nav aria-label="Console Primary Navigation">
+    <div class="nav-section-title">Core Management</div>
+    <ul class="nav-menu">
+      <li>
+        <a href="overview.html" class="nav-item-btn active" aria-current="page">
+          <span class="nav-item-left">
+            <span aria-hidden="true">📊</span>
+            <span>Dashboard Overview</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="nodes.html" class="nav-item-btn">
+          <span class="nav-item-left">
+            <span aria-hidden="true">🖥️</span>
+            <span>Infrastructure Nodes</span>
+          </span>
+          <span class="nav-badge"><span class="sr-only">1 alert</span>1</span>
+        </a>
+      </li>
+      <li>
+        <a href="provision.html" class="nav-item-btn">
+          <span class="nav-item-left">
+            <span aria-hidden="true">⚙️</span>
+            <span>Provision Cluster</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="audit.html" class="nav-item-btn">
+          <span class="nav-item-left">
+            <span aria-hidden="true">🛡️</span>
+            <span>Security Audit</span>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="sidebar-status-card">
+    <div class="sidebar-status-header">
+      <span class="sidebar-status-title">Telemetry Health</span>
+      <span class="status-indicator-dot" aria-hidden="true"></span>
+    </div>
+    <div class="sidebar-status-body">All Systems Operational</div>
+  </div>
+</aside>

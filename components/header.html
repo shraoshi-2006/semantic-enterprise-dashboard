@@ -1,0 +1,62 @@
+<!-- Semantic Header Component (<header>) -->
+<header class="site-header">
+  <div class="header-left">
+    <button
+      type="button"
+      class="sidebar-toggle-btn"
+      id="sidebar-toggle-comp"
+      aria-label="Toggle navigation sidebar menu"
+      aria-expanded="true"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+
+    <a href="../index.html" class="brand-logo" aria-label="Apex Cloud Enterprise Console - Home">
+      <span class="brand-icon" aria-hidden="true">▲</span>
+      <span>Apex Cloud</span>
+    </a>
+  </div>
+
+  <form class="header-search-form" role="search">
+    <label for="header-search-comp" class="sr-only">
+      Search cloud clusters, security policies, and enterprise assets
+    </label>
+    <div class="search-input-wrapper">
+      <input
+        type="search"
+        id="header-search-comp"
+        class="header-search-input"
+        placeholder="Search clusters, nodes, IPs..."
+        autocomplete="off"
+      >
+      <button type="submit" class="search-submit-icon" aria-label="Submit console search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </div>
+  </form>
+
+  <div class="header-right">
+    <button
+      type="button"
+      class="header-action-btn"
+      role="switch"
+      aria-checked="false"
+      aria-label="High contrast mode toggle"
+    >
+      <span aria-hidden="true">👁️</span>
+      <span>High Contrast</span>
+    </button>
+
+    <div class="user-profile-badge" role="group" aria-label="User session information">
+      <span class="user-avatar" aria-hidden="true">JD</span>
+      <span>DevOps Admin</span>
+    </div>
+  </div>
+</header>

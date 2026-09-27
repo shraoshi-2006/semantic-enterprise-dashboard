@@ -1,0 +1,56 @@
+<!-- Accessible Native HTML5 <dialog> Modal Component -->
+<dialog
+  id="accessible-modal-component"
+  class="accessible-dialog"
+  aria-labelledby="modal-comp-title"
+  aria-describedby="modal-comp-desc"
+>
+  <div class="dialog-header">
+    <h2 id="modal-comp-title" class="dialog-title">Quick Deploy Instance</h2>
+    <button
+      type="button"
+      class="dialog-close-btn"
+      aria-label="Close modal dialog"
+      onclick="this.closest('dialog').close()"
+    >
+      ×
+    </button>
+  </div>
+
+  <div class="dialog-body">
+    <p id="modal-comp-desc" class="form-helper-text">
+      Provision an enterprise computing node attached to your default security group.
+    </p>
+
+    <form method="dialog">
+      <div class="form-group">
+        <label for="comp-instance-name" class="form-label">
+          Instance Tag <span class="required-indicator" aria-hidden="true">*</span>
+        </label>
+        <input
+          type="text"
+          id="comp-instance-name"
+          class="form-control-input"
+          placeholder="e.g. edge-ingress-01"
+          required
+        >
+      </div>
+
+      <div class="dialog-footer">
+        <button
+          type="button"
+          class="btn-secondary"
+          onclick="this.closest('dialog').close()"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="btn-primary"
+        >
+          Deploy
+        </button>
+      </div>
+    </form>
+  </div>
+</dialog>

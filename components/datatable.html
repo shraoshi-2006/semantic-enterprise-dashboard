@@ -1,0 +1,40 @@
+<!-- Semantic & Accessible Data Table Component -->
+<div class="table-container-card">
+  <div class="table-responsive-wrapper">
+    <table class="accessible-table">
+      <caption>Production Compute Fleet Status and Resource Allocation</caption>
+      <thead>
+        <tr>
+          <th scope="col">Node Identifier</th>
+          <th scope="col">Geographic Region</th>
+          <th scope="col">Workload Role</th>
+          <th scope="col">Resource Utilization</th>
+          <th scope="col">Health Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">ip-10-0-1-42.us-east-1</th>
+          <td>US-East (N. Virginia)</td>
+          <td>Control Plane</td>
+          <td>24% CPU · 38% RAM</td>
+          <td><span class="status-pill status-active">● Healthy</span></td>
+        </tr>
+        <tr>
+          <th scope="row">ip-10-0-2-88.us-east-1</th>
+          <td>US-East (N. Virginia)</td>
+          <td>Worker Pool</td>
+          <td>68% CPU · 72% RAM</td>
+          <td><span class="status-pill status-active">● Healthy</span></td>
+        </tr>
+        <tr>
+          <th scope="row">ip-10-1-5-19.eu-central-1</th>
+          <td>EU-Central (Frankfurt)</td>
+          <td>Ingestion Service</td>
+          <td>89% CPU · 91% RAM</td>
+          <td><span class="status-pill status-warning">▲ High Load</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

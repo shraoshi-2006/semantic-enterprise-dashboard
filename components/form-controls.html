@@ -1,0 +1,50 @@
+<!-- Accessible Form Controls Component (<fieldset>, <legend>, <label>, aria-describedby) -->
+<form class="form-card" novalidate action="#">
+  <fieldset class="accessible-fieldset">
+    <legend class="accessible-legend">Security &amp; Network Policies</legend>
+
+    <div class="form-group">
+      <label for="comp-vpc-id" class="form-label">
+        Virtual Private Cloud (VPC) Subnet <span class="required-indicator" aria-hidden="true">*</span>
+      </label>
+      <div id="comp-vpc-helper" class="form-helper-text">
+        Designated CIDR block for internal traffic segregation.
+      </div>
+      <input
+        type="text"
+        id="comp-vpc-id"
+        class="form-control-input"
+        placeholder="10.0.0.0/16"
+        required
+        pattern="^10\.\d{1,3}\.\d{1,3}\.\d{1,3}/\d{1,2}$"
+        aria-describedby="comp-vpc-helper"
+      >
+    </div>
+
+    <div class="form-group">
+      <span id="comp-backup-label" class="form-label">Snapshot Replication Frequency</span>
+      <div class="radio-cards-container" role="radiogroup" aria-labelledby="comp-backup-label">
+        <label class="radio-card-label">
+          <input type="radio" name="compBackup" value="hourly" checked>
+          <span class="radio-card-text">
+            <span class="radio-card-title">Hourly Snapshots</span>
+            <span class="radio-card-desc">High resilience (RPO &lt; 1h)</span>
+          </span>
+        </label>
+        <label class="radio-card-label">
+          <input type="radio" name="compBackup" value="daily">
+          <span class="radio-card-text">
+            <span class="radio-card-title">Daily Snapshots</span>
+            <span class="radio-card-desc">Standard backup (RPO &lt; 24h)</span>
+          </span>
+        </label>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="form-actions-row">
+    <button type="submit" class="btn btn-primary">
+      <span>Save Network Policies</span>
+    </button>
+  </div>
+</form>

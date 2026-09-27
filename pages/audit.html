@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Apex Enterprise Cloud Console: Security Audit Logs & Compliance Verification.">
+    <title>Security Audit &amp; Compliance | Apex Enterprise Cloud Console</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/dashboard.css">
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <div class="sr-only" role="status" aria-live="polite" id="a11y-announcer"></div>
+
+    <div class="app-layout">
+      <!-- Semantic Header (<header>) -->
+      <header class="site-header">
+        <div class="header-left">
+          <a href="../index.html" class="brand-logo" aria-label="Apex Cloud Enterprise Console - Home">
+            <span class="brand-icon" aria-hidden="true">▲</span>
+            <span>Apex Cloud</span>
+          </a>
+        </div>
+
+        <div class="header-right">
+          <button type="button" class="header-action-btn" id="contrast-toggle-btn" role="switch" aria-checked="false" aria-label="High contrast mode toggle">
+            <span aria-hidden="true">👁️</span>
+            <span>High Contrast</span>
+          </button>
+          <button type="button" class="header-action-btn" id="theme-toggle-btn" aria-label="Toggle color theme">
+            <span id="theme-icon" aria-hidden="true">☀️</span>
+            <span id="theme-text">Light Mode</span>
+          </button>
+          <div class="user-profile-badge" role="group" aria-label="User session">
+            <span class="user-avatar" aria-hidden="true">JD</span>
+            <span>DevOps Admin</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Semantic Sidebar (<aside>) -->
+      <aside class="site-sidebar" aria-label="Console Navigation Sidebar">
+        <nav aria-label="Console Primary Navigation">
+          <div class="nav-section-title">Core Management</div>
+          <ul class="nav-menu">
+            <li>
+              <a href="../index.html" class="nav-item-btn">
+                <span class="nav-item-left">
+                  <span aria-hidden="true">📊</span>
+                  <span>Dashboard Overview</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="nodes.html" class="nav-item-btn">
+                <span class="nav-item-left">
+                  <span aria-hidden="true">🖥️</span>
+                  <span>Infrastructure Nodes</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="provision.html" class="nav-item-btn">
+                <span class="nav-item-left">
+                  <span aria-hidden="true">⚙️</span>
+                  <span>Provision Cluster</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="audit.html" class="nav-item-btn active" aria-current="page">
+                <span class="nav-item-left">
+                  <span aria-hidden="true">🛡️</span>
+                  <span>Security Audit</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Semantic Main Content (<main id="main">) -->
+      <main id="main" class="site-main" tabindex="-1">
+        <nav class="breadcrumbs" aria-label="Breadcrumb Navigation">
+          <ol>
+            <li><a href="../index.html">Apex Console</a></li>
+            <li class="breadcrumbs-separator" aria-hidden="true">/</li>
+            <li aria-current="page">Security Audit &amp; Event Trail</li>
+          </ol>
+        </nav>
+
+        <header class="page-header-bar">
+          <div>
+            <h1 class="page-title">Immutable Security Audit Trail</h1>
+            <p class="page-description">Cryptographically signed administrative audit log streams conforming to SOC-2 and HIPAA standards.</p>
+          </div>
+        </header>
+
+        <section aria-labelledby="audit-logs-heading">
+          <h2 id="audit-logs-heading" class="sr-only">Audit Log Records</h2>
+          <div class="incident-stream-grid">
+            <article class="kpi-card feed-card" aria-labelledby="log-1">
+              <div class="feed-card-header">
+                <div>
+                  <span class="status-pill status-active">IAM Policy Modified</span>
+                  <h3 id="log-1" class="feed-card-title">
+                    Role <code class="code-highlight">KubeClusterAdmin</code> updated by <code class="code-highlight">admin@apexcloud.internal</code>
+                  </h3>
+                  <p class="feed-card-desc">
+                    Added least-privilege KMS decryption permissions for secret vault migration.
+                  </p>
+                </div>
+                <time datetime="2026-09-27T16:20:00Z" class="feed-card-time">
+                  2026-09-27 16:20 UTC
+                </time>
+              </div>
+            </article>
+
+            <article class="kpi-card feed-card" aria-labelledby="log-2">
+              <div class="feed-card-header">
+                <div>
+                  <span class="status-pill status-active">VPC Peering Established</span>
+                  <h3 id="log-2" class="feed-card-title">
+                    Secure transit gateway linked between <code class="code-highlight">vpc-us-east-prod</code> and <code class="code-highlight">vpc-eu-central-dr</code>
+                  </h3>
+                  <p class="feed-card-desc">
+                    Inter-region encrypted cross-connect active with 10Gbps dedicated pipe.
+                  </p>
+                </div>
+                <time datetime="2026-09-27T13:05:00Z" class="feed-card-time">
+                  2026-09-27 13:05 UTC
+                </time>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <!-- Semantic Footer (<footer>) -->
+      <footer class="site-footer">
+        <div>&copy; 2026 Apex Cloud Enterprise Systems Inc. All rights reserved.</div>
+        <ul class="footer-nav">
+          <li><a href="#main">WCAG 2.1 AA Compliance</a></li>
+          <li><a href="#main">Security Policy</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+  </body>
+</html>

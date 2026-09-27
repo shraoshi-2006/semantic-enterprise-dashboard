@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Apex Enterprise Cloud Console: Infrastructure Nodes & Cluster Topology Data Table.">
+    <title>Infrastructure Nodes | Apex Enterprise Cloud Console</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/dashboard.css">
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <div class="sr-only" role="status" aria-live="polite" id="a11y-announcer"></div>
+
+    <div class="app-layout">
+      <!-- Semantic Header (<header>) -->
+      <header class="site-header">
+        <div class="header-left">
+          <a href="../index.html" class="brand-logo" aria-label="Apex Cloud Enterprise Console - Home">
+            <span class="brand-icon" aria-hidden="true">▲</span>
+            <span>Apex Cloud</span>
+          </a>
+        </div>
+
+        <form class="header-search-form" role="search">
+          <label for="page-search-input" class="sr-only">Search nodes and clusters</label>
+          <div class="search-input-wrapper">
+            <input type="search" id="page-search-input" class="header-search-input" placeholder="Search infrastructure nodes...">
+            <button type="submit" class="search-submit-icon" aria-label="Submit node search">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
+        </form>
+
+        <div class="header-right">
+          <button type="button" class="header-action-btn" id="contrast-toggle-btn" role="switch" aria-checked="false" aria-label="High contrast mode toggle">
+            <span aria-hidden="true">👁️</span>
+            <span>High Contrast</span>
+          </button>
+          <button type="button" class="header-action-btn" id="theme-toggle-btn" aria-label="Toggle color theme">
+            <span id="theme-icon" aria-hidden="true">☀️</span>
+            <span id="theme-text">Light Mode</span>
+          </button>
+          <div class="user-profile-badge" role="group" aria-label="User session">
+            <span class="user-avatar" aria-hidden="true">JD</span>
+            <span>DevOps Admin</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Semantic Sidebar (<aside>) -->
+      <aside class="site-sidebar" aria-label="Console Navigation Sidebar">
+        <nav aria-label="Console Primary Navigation">
+          <div class="nav-section-title">Core Management</div>
+          <ul class="nav-menu">
+            <li>
+              <a href="../index.html" class="nav-item-btn">
+                <span class="nav-item-left">
+                  <span aria-hidden="true">📊</span>
+                  <span>Dashboard Overview</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="nodes.html" class="nav-item-btn active" aria-current="page">
+                <span class="nav-item-left">
+                  <span aria-hidden="true">🖥️</span>
+                  <span>Infrastructure Nodes</span>
+                </span>
+                <span class="nav-badge"><span class="sr-only">1 alert</span>1</span>
+              </a>
+            </li>
+            <li>
+              <a href="provision.html" class="nav-item-btn">
+                <span class="nav-item-left">
+                  <span aria-hidden="true">⚙️</span>
+                  <span>Provision Cluster</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="audit.html" class="nav-item-btn">
+                <span class="nav-item-left">
+                  <span aria-hidden="true">🛡️</span>
+                  <span>Security Audit</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Semantic Main Content (<main id="main">) -->
+      <main id="main" class="site-main" tabindex="-1">
+        <nav class="breadcrumbs" aria-label="Breadcrumb Navigation">
+          <ol>
+            <li><a href="../index.html">Apex Console</a></li>
+            <li class="breadcrumbs-separator" aria-hidden="true">/</li>
+            <li aria-current="page">Infrastructure Nodes</li>
+          </ol>
+        </nav>
+
+        <header class="page-header-bar">
+          <div>
+            <h1 class="page-title">Compute Fleet Inventory</h1>
+            <p class="page-description">Complete tabular breakdown of cluster nodes, virtualization tiers, and telemetry health.</p>
+          </div>
+        </header>
+
+        <section aria-labelledby="nodes-page-table-heading">
+          <div class="table-container-card">
+            <div class="table-responsive-wrapper">
+              <table class="accessible-table" id="nodes-data-table">
+                <caption id="nodes-page-table-heading">Production Compute Fleet Nodes &amp; Real-time Telemetry</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Node Hostname</th>
+                    <th scope="col">Cloud Zone</th>
+                    <th scope="col">Assigned Service</th>
+                    <th scope="col">Utilization</th>
+                    <th scope="col">Health State</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">ip-10-0-1-42.us-east-1</th>
+                    <td>US-East (Zone A)</td>
+                    <td>Kubernetes API Server</td>
+                    <td>24% CPU · 38% RAM</td>
+                    <td><span class="status-pill status-active">● Healthy</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">ip-10-0-2-88.us-east-1</th>
+                    <td>US-East (Zone B)</td>
+                    <td>Payment Ledger Processing</td>
+                    <td>68% CPU · 72% RAM</td>
+                    <td><span class="status-pill status-active">● Healthy</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">ip-10-1-5-19.eu-central-1</th>
+                    <td>EU-Central (Zone A)</td>
+                    <td>Data Ingestion Pipeline</td>
+                    <td>89% CPU · 91% RAM</td>
+                    <td><span class="status-pill status-warning">▲ High Memory</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Semantic Footer (<footer>) -->
+      <footer class="site-footer">
+        <div>&copy; 2026 Apex Cloud Enterprise Systems Inc. All rights reserved.</div>
+        <ul class="footer-nav">
+          <li><a href="#main">WCAG 2.1 AA Compliance</a></li>
+          <li><a href="#main">SOC-2 Type II</a></li>
+          <li><a href="#main">Privacy Policy</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+  </body>
+</html>

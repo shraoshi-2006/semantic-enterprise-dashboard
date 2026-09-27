@@ -1,0 +1,24 @@
+{
+  "name": "semantic-enterprise-dashboard",
+  "version": "1.0.0",
+  "description": "Enterprise cloud console built on strict HTML5 semantic standards, WCAG 2.1 accessibility guidelines, and zero W3C validation errors.",
+  "scripts": {
+    "validate": "html-validate index.html pages/*.html components/*.html",
+    "test": "node test/w3c-validate.js",
+    "start": "npx serve . -l 3000"
+  },
+  "keywords": [
+    "html5",
+    "semantic-html",
+    "accessibility",
+    "wcag21",
+    "wai-aria",
+    "enterprise-dashboard",
+    "w3c-validator"
+  ],
+  "author": "Apex Cloud Systems",
+  "license": "MIT",
+  "devDependencies": {
+    "html-validate": "^11.16.1"
+  }
+}

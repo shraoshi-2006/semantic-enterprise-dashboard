@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Apex Enterprise Cloud Console: High-performance, semantic HTML5 and WCAG 2.1 AA compliant infrastructure management dashboard.">
+    <title>Apex Enterprise Cloud Console | Semantic Dashboard Architecture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/dashboard.css">
+  </head>
+  <body>
+    <!-- WCAG 2.4.1: Skip-to-content bypass mechanism -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- ARIA Live Status Announcer for Screen Readers -->
+    <div class="sr-only" role="status" aria-live="polite" id="a11y-announcer"></div>
+
+    <div class="app-layout">
+      <!-- ====================================================================
+           1. SEMANTIC HEADER (<header>)
+           ==================================================================== -->
+      <header class="site-header">
+        <div class="header-left">
+          <button
+            type="button"
+            class="sidebar-toggle-btn"
+            id="sidebar-toggle"
+            aria-label="Toggle navigation sidebar menu"
+            aria-expanded="true"
+            aria-controls="primary-sidebar"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+
+          <a href="#view-overview" class="brand-logo" aria-label="Apex Cloud Enterprise Console - Home">
+            <span class="brand-icon" aria-hidden="true">▲</span>
+            <span>Apex Cloud</span>
+          </a>
+        </div>
+
+        <!-- Accessible Global Resource Search Form with Submit Button -->
+        <form class="header-search-form" role="search" id="global-search-form">
+          <label for="global-search-input" class="sr-only">
+            Search cloud clusters, security policies, and enterprise assets
+          </label>
+          <div class="search-input-wrapper">
+            <input
+              type="search"
+              id="global-search-input"
+              class="header-search-input"
+              placeholder="Search clusters, nodes, IPs (e.g. k8s-prod)..."
+              autocomplete="off"
+            >
+            <button type="submit" class="search-submit-icon" aria-label="Submit search query">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </button>
+          </div>
+        </form>
+
+        <!-- Global Header Controls -->
+        <div class="header-right">
+          <button
+            type="button"
+            class="header-action-btn"
+            id="contrast-toggle-btn"
+            role="switch"
+            aria-checked="false"
+            aria-label="High contrast mode toggle"
+          >
+            <span aria-hidden="true">👁️</span>
+            <span>High Contrast</span>
+          </button>
+
+          <button
+            type="button"
+            class="header-action-btn"
+            id="theme-toggle-btn"
+            aria-label="Toggle dark and light color theme"
+          >
+            <span id="theme-icon" aria-hidden="true">☀️</span>
+            <span id="theme-text">Light Mode</span>
+          </button>
+
+          <div class="user-profile-badge" role="group" aria-label="User session information">
+            <span class="user-avatar" aria-hidden="true">JD</span>
+            <span>DevOps Admin</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- ====================================================================
+           2. SEMANTIC SIDEBAR (<aside>)
+           ==================================================================== -->
+      <aside class="site-sidebar" id="primary-sidebar" aria-label="Console Navigation Sidebar">
+        <nav aria-label="Console Primary Navigation">
+          <div class="nav-section-title">Core Management</div>
+          <ul class="nav-menu">
+            <li>
+              <a
+                href="#view-overview"
+                class="nav-item-btn active"
+                id="nav-link-overview"
+                aria-current="page"
+              >
+                <span class="nav-item-left">
+                  <span aria-hidden="true">📊</span>
+                  <span>Dashboard Overview</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#view-datatable"
+                class="nav-item-btn"
+                id="nav-link-datatable"
+              >
+                <span class="nav-item-left">
+                  <span aria-hidden="true">🖥️</span>
+                  <span>Infrastructure Nodes</span>
+                </span>
+                <span class="nav-badge"><span class="sr-only">1 degraded node</span>1</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#view-forms"
+                class="nav-item-btn"
+                id="nav-link-forms"
+              >
+                <span class="nav-item-left">
+                  <span aria-hidden="true">⚙️</span>
+                  <span>Provision Cluster</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#view-audit"
+                class="nav-item-btn"
+                id="nav-link-audit"
+              >
+                <span class="nav-item-left">
+                  <span aria-hidden="true">🛡️</span>
+                  <span>Security Audit</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+
+          <div class="nav-section-title">Quick Actions</div>
+          <ul class="nav-menu">
+            <li>
+              <button
+                type="button"
+                class="nav-item-btn"
+                id="sidebar-open-modal-btn"
+                aria-haspopup="dialog"
+              >
+                <span class="nav-item-left">
+                  <span aria-hidden="true">⚡</span>
+                  <span>Quick Deploy Modal</span>
+                </span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- System Health Widget -->
+        <div class="sidebar-status-card">
+          <div class="sidebar-status-header">
+            <span class="sidebar-status-title">
+              Cluster Telemetry
+            </span>
+            <span class="status-indicator-dot" aria-hidden="true"></span>
+          </div>
+          <div class="sidebar-status-body">All Systems Operational</div>
+          <div class="sidebar-status-meta">
+            Uptime: 99.98% · 24 Regions
+          </div>
+        </div>
+      </aside>
+
+      <!-- ====================================================================
+           3. SEMANTIC MAIN CONTENT AREA (<main id="main">)
+           ==================================================================== -->
+      <main id="main" class="site-main" tabindex="-1">
+        <!-- Breadcrumb Navigation (<nav aria-label="Breadcrumb Navigation">) -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb Navigation">
+          <ol>
+            <li><a href="#view-overview">Apex Console</a></li>
+            <li class="breadcrumbs-separator" aria-hidden="true">/</li>
+            <li><a href="#view-overview">Production US-East</a></li>
+            <li class="breadcrumbs-separator" aria-hidden="true">/</li>
+            <li aria-current="page" id="breadcrumb-current">Infrastructure Overview</li>
+          </ol>
+        </nav>
+
+        <!-- Page Header Bar -->
+        <header class="page-header-bar">
+          <div>
+            <h1 class="page-title" id="page-primary-heading">Enterprise Cloud Operations</h1>
+            <p class="page-description">
+              Real-time telemetry, semantic node catalog, and accessible cluster provisioning controls.
+            </p>
+          </div>
+
+          <div class="page-actions-group">
+            <button
+              type="button"
+              class="btn-secondary"
+              id="export-metrics-btn"
+              aria-label="Export performance metrics in CSV format"
+            >
+              <span aria-hidden="true">📥</span>
+              <span>Export CSV</span>
+            </button>
+
+            <button
+              type="button"
+              class="btn-primary"
+              id="open-provision-modal-btn"
+              aria-haspopup="dialog"
+            >
+              <span aria-hidden="true">+</span>
+              <span>Deploy Node (Modal)</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- ==================================================================
+             VIEW SECTION 1: KPI OVERVIEW & INCIDENTS
+             ================================================================== -->
+        <section id="view-overview" aria-labelledby="overview-section-heading">
+          <h2 id="overview-section-heading" class="sr-only">Key Performance Indicators &amp; Operational Metrics</h2>
+
+          <!-- KPI Cards Grid (<article> items) -->
+          <div class="kpi-grid">
+            <article class="kpi-card" aria-labelledby="kpi-1-title">
+              <div class="kpi-header">
+                <span class="kpi-title" id="kpi-1-title">Total Active Nodes</span>
+                <span class="kpi-icon-pill" aria-hidden="true">🖥️</span>
+              </div>
+              <div class="kpi-value">1,482</div>
+              <div class="kpi-trend trend-positive">
+                <span aria-hidden="true">↑</span>
+                <span>+12% capacity scaling</span>
+              </div>
+            </article>
+
+            <article class="kpi-card" aria-labelledby="kpi-2-title">
+              <div class="kpi-header">
+                <span class="kpi-title" id="kpi-2-title">Total Ingress Traffic</span>
+                <span class="kpi-icon-pill" aria-hidden="true">🌐</span>
+              </div>
+              <div class="kpi-value">4.8 TB/s</div>
+              <div class="kpi-trend trend-positive">
+                <span aria-hidden="true">✓</span>
+                <span>Nominal bandwidth load</span>
+              </div>
+            </article>
+
+            <article class="kpi-card" aria-labelledby="kpi-3-title">
+              <div class="kpi-header">
+                <span class="kpi-title" id="kpi-3-title">Global Error Rate</span>
+                <span class="kpi-icon-pill" aria-hidden="true">⚡</span>
+              </div>
+              <div class="kpi-value">0.012%</div>
+              <div class="kpi-trend trend-positive">
+                <span aria-hidden="true">↓</span>
+                <span>-0.004% within strict SLO</span>
+              </div>
+            </article>
+
+            <article class="kpi-card" aria-labelledby="kpi-4-title">
+              <div class="kpi-header">
+                <span class="kpi-title" id="kpi-4-title">WCAG 2.1 AA Audit Score</span>
+                <span class="kpi-icon-pill" aria-hidden="true">🛡️</span>
+              </div>
+              <div class="kpi-value">100/100</div>
+              <div class="kpi-trend trend-positive">
+                <span aria-hidden="true">✓</span>
+                <span>Zero syntax or a11y errors</span>
+              </div>
+            </article>
+          </div>
+
+          <!-- Recent Incidents Feed (<article> items with <time>) -->
+          <section class="incidents-section" aria-labelledby="incidents-feed-heading">
+            <div class="section-headline-row">
+              <h2 id="incidents-feed-heading" class="section-headline-title">
+                Operational Activity &amp; Audit Trail
+              </h2>
+              <span class="section-headline-subtitle">Real-time event stream</span>
+            </div>
+
+            <div class="incident-stream-grid">
+              <article class="kpi-card feed-card" aria-labelledby="event-1-title">
+                <div class="feed-card-header">
+                  <div>
+                    <span class="status-pill status-active">Automated Scale-Out</span>
+                    <h3 id="event-1-title" class="feed-card-title">
+                      Cluster <code class="code-highlight">k8s-us-east-prod</code> added 8 worker nodes
+                    </h3>
+                    <p class="feed-card-desc">
+                      Horizontal Pod Autoscaler triggered by sustained CPU threshold exceedance (>78%).
+                    </p>
+                  </div>
+                  <time datetime="2026-09-27T17:15:00Z" class="feed-card-time">
+                    2026-09-27 17:15 UTC
+                  </time>
+                </div>
+              </article>
+
+              <article class="kpi-card feed-card" aria-labelledby="event-2-title">
+                <div class="feed-card-header">
+                  <div>
+                    <span class="status-pill status-warning">Security Patch Applied</span>
+                    <h3 id="event-2-title" class="feed-card-title">
+                      Kernel hot-patch CVE-2026-8812 applied across Frankfurt edge pool
+                    </h3>
+                    <p class="feed-card-desc">
+                      Zero-downtime rolling restart performed. All security baselines re-verified.
+                    </p>
+                  </div>
+                  <time datetime="2026-09-27T14:40:00Z" class="feed-card-time">
+                    2026-09-27 14:40 UTC
+                  </time>
+                </div>
+              </article>
+            </div>
+          </section>
+        </section>
+
+        <!-- ==================================================================
+             VIEW SECTION 2: ACCESSIBLE DATA TABLE
+             ================================================================== -->
+        <section id="view-datatable" aria-labelledby="datatable-heading">
+          <div class="table-container-card">
+            <div class="table-toolbar">
+              <div>
+                <h2 id="datatable-heading" class="table-title">
+                  Enterprise Infrastructure Nodes
+                </h2>
+                <p class="form-helper-text" id="table-summary-desc">
+                  Live cluster nodes, security baseline compliance, and telemetry health scores.
+                </p>
+              </div>
+
+              <div class="table-filter-group">
+                <label for="table-filter-status" class="sr-only">Filter nodes by operational status</label>
+                <select id="table-filter-status" class="form-control-select select-filter-compact">
+                  <option value="all">All Statuses</option>
+                  <option value="healthy">Healthy (Operational)</option>
+                  <option value="warning">Warning (Degraded)</option>
+                  <option value="maintenance">Maintenance</option>
+                </select>
+
+                <label for="table-search-input" class="sr-only">Search table by node hostname or IP</label>
+                <input
+                  type="text"
+                  id="table-search-input"
+                  class="form-control-input input-search-compact"
+                  placeholder="Filter nodes..."
+                >
+              </div>
+            </div>
+
+            <!-- Responsive Table Wrapper -->
+            <div class="table-responsive-wrapper">
+              <table class="accessible-table" aria-describedby="table-summary-desc" id="nodes-data-table">
+                <caption>Production Compute Fleet Status and Resource Allocation</caption>
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-checkbox">
+                      <input
+                        type="checkbox"
+                        id="select-all-nodes"
+                        aria-label="Select all rows in compute fleet table"
+                      >
+                    </th>
+                    <th scope="col" aria-sort="ascending">
+                      <button type="button" class="sort-btn" id="sort-hostname-btn">
+                        <span>Node Identifier</span>
+                        <span aria-hidden="true">▲</span>
+                      </button>
+                    </th>
+                    <th scope="col">Geographic Region</th>
+                    <th scope="col">Role &amp; Workload</th>
+                    <th scope="col">CPU / Mem Utilization</th>
+                    <th scope="col">Operational Status</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <input
+                        type="checkbox"
+                        class="row-select-checkbox"
+                        aria-label="Select node ip-10-0-1-42.us-east-1"
+                      >
+                    </td>
+                    <th scope="row">ip-10-0-1-42.us-east-1</th>
+                    <td>US-East (N. Virginia)</td>
+                    <td>Kubernetes Master · API Control</td>
+                    <td>24% CPU · 38% RAM</td>
+                    <td>
+                      <span class="status-pill status-active">
+                        <span aria-hidden="true">●</span> Healthy
+                      </span>
+                    </td>
+                    <td>
+                      <button type="button" class="btn-secondary btn-table-action" aria-label="Inspect telemetry for ip-10-0-1-42">
+                        Inspect
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <input
+                        type="checkbox"
+                        class="row-select-checkbox"
+                        aria-label="Select node ip-10-0-2-88.us-east-1"
+                      >
+                    </td>
+                    <th scope="row">ip-10-0-2-88.us-east-1</th>
+                    <td>US-East (N. Virginia)</td>
+                    <td>Worker · Payment Processing</td>
+                    <td>68% CPU · 72% RAM</td>
+                    <td>
+                      <span class="status-pill status-active">
+                        <span aria-hidden="true">●</span> Healthy
+                      </span>
+                    </td>
+                    <td>
+                      <button type="button" class="btn-secondary btn-table-action" aria-label="Inspect telemetry for ip-10-0-2-88">
+                        Inspect
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <input
+                        type="checkbox"
+                        class="row-select-checkbox"
+                        aria-label="Select node ip-10-1-5-19.eu-central-1"
+                      >
+                    </td>
+                    <th scope="row">ip-10-1-5-19.eu-central-1</th>
+                    <td>EU-Central (Frankfurt)</td>
+                    <td>Worker · Data Ingestion Pipe</td>
+                    <td>89% CPU · 91% RAM</td>
+                    <td>
+                      <span class="status-pill status-warning">
+                        <span aria-hidden="true">▲</span> High Memory
+                      </span>
+                    </td>
+                    <td>
+                      <button type="button" class="btn-secondary btn-table-action" aria-label="Inspect telemetry for ip-10-1-5-19">
+                        Inspect
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <input
+                        type="checkbox"
+                        class="row-select-checkbox"
+                        aria-label="Select node ip-10-2-8-04.ap-northeast-1"
+                      >
+                    </td>
+                    <th scope="row">ip-10-2-8-04.ap-northeast-1</th>
+                    <td>AP-Northeast (Tokyo)</td>
+                    <td>Database Replica · Read Pool</td>
+                    <td>42% CPU · 55% RAM</td>
+                    <td>
+                      <span class="status-pill status-active">
+                        <span aria-hidden="true">●</span> Healthy
+                      </span>
+                    </td>
+                    <td>
+                      <button type="button" class="btn-secondary btn-table-action" aria-label="Inspect telemetry for ip-10-2-8-04">
+                        Inspect
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <input
+                        type="checkbox"
+                        class="row-select-checkbox"
+                        aria-label="Select node ip-10-3-0-12.sa-east-1"
+                      >
+                    </td>
+                    <th scope="row">ip-10-3-0-12.sa-east-1</th>
+                    <td>SA-East (São Paulo)</td>
+                    <td>Edge Gateway · TLS Terminator</td>
+                    <td>15% CPU · 22% RAM</td>
+                    <td>
+                      <span class="status-pill status-maintenance">
+                        <span aria-hidden="true">⚙</span> Maintenance
+                      </span>
+                    </td>
+                    <td>
+                      <button type="button" class="btn-secondary btn-table-action" aria-label="Inspect telemetry for ip-10-3-0-12">
+                        Inspect
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Table Pagination Navigation (<nav aria-label="Table pagination">) -->
+            <nav class="table-pagination" aria-label="Nodes table pagination">
+              <div>Showing 1 to 5 of 1,482 infrastructure nodes</div>
+              <ul class="pagination-controls">
+                <li>
+                  <button type="button" class="pagination-btn" disabled aria-label="Previous page">
+                    &lt;
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="pagination-btn" aria-current="page" aria-label="Page 1">
+                    1
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="pagination-btn" aria-label="Page 2">
+                    2
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="pagination-btn" aria-label="Page 3">
+                    3
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="pagination-btn" aria-label="Next page">
+                    &gt;
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW SECTION 3: COMPREHENSIVE ACCESSIBLE FORM CONTROLS
+             ================================================================== -->
+        <section id="view-forms" aria-labelledby="form-section-heading">
+          <div class="form-card">
+            <h2 id="form-section-heading" class="form-header-title">
+              Cluster Provisioning &amp; Scaling Configuration
+            </h2>
+            <p class="form-helper-text form-header-subtitle">
+              Configure enterprise computing infrastructure with strict validation and full keyboard accessibility.
+            </p>
+
+            <!-- Error Summary Banner (WCAG 3.3.1) -->
+            <div
+              class="error-summary-banner error-summary-hidden"
+              id="form-error-summary"
+              role="alert"
+              aria-labelledby="error-summary-heading"
+              tabindex="-1"
+            >
+              <div id="error-summary-heading" class="error-summary-title">
+                <span aria-hidden="true">⚠️</span>
+                <span>Please correct the errors in your submission</span>
+              </div>
+              <ul class="error-summary-list" id="error-summary-list"></ul>
+            </div>
+
+            <form id="cluster-provision-form" novalidate>
+              <!-- Fieldset 1: Cluster Identity (<fieldset>, <legend>) -->
+              <fieldset class="accessible-fieldset">
+                <legend class="accessible-legend">1. Cluster Identity &amp; Region</legend>
+
+                <div class="form-group">
+                  <label for="cluster-name-input" class="form-label">
+                    Cluster Resource Name <span class="required-indicator" aria-hidden="true">*</span>
+                  </label>
+                  <div id="cluster-name-helper" class="form-helper-text">
+                    Must be 5 to 30 lowercase alphanumeric characters with hyphens (e.g. <code>k8s-prod-useast</code>).
+                  </div>
+                  <input
+                    type="text"
+                    id="cluster-name-input"
+                    name="clusterName"
+                    class="form-control-input"
+                    placeholder="e.g. k8s-prod-useast"
+                    required
+                    minlength="5"
+                    maxlength="30"
+                    pattern="^[a-z0-9-]+$"
+                    aria-describedby="cluster-name-helper"
+                    aria-required="true"
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="cluster-region-select" class="form-label">
+                    Target Cloud Region <span class="required-indicator" aria-hidden="true">*</span>
+                  </label>
+                  <div id="cluster-region-helper" class="form-helper-text">
+                    Select a multi-zone availability region with SOC-2 compliance.
+                  </div>
+                  <select
+                    id="cluster-region-select"
+                    name="clusterRegion"
+                    class="form-control-select"
+                    required
+                    aria-describedby="cluster-region-helper"
+                    aria-required="true"
+                  >
+                    <option value="">-- Choose Cloud Region --</option>
+                    <option value="us-east-1">US-East (N. Virginia - 3 AZs)</option>
+                    <option value="us-west-2">US-West (Oregon - 3 AZs)</option>
+                    <option value="eu-central-1">EU-Central (Frankfurt - GDPR Compliant)</option>
+                    <option value="ap-northeast-1">AP-Northeast (Tokyo - 3 AZs)</option>
+                  </select>
+                </div>
+              </fieldset>
+
+              <!-- Fieldset 2: Compute Architecture & Sizing -->
+              <fieldset class="accessible-fieldset">
+                <legend class="accessible-legend">2. Compute Architecture &amp; Tier</legend>
+
+                <div class="form-group">
+                  <span id="tier-group-label" class="form-label">
+                    Worker Node Instance Profile <span class="required-indicator" aria-hidden="true">*</span>
+                  </span>
+                  <div class="radio-cards-container" role="radiogroup" aria-labelledby="tier-group-label">
+                    <label class="radio-card-label">
+                      <input type="radio" name="instanceProfile" value="general" checked>
+                      <span class="radio-card-text">
+                        <span class="radio-card-title">General Purpose</span>
+                        <span class="radio-card-desc">4 vCPU · 16 GB RAM</span>
+                      </span>
+                    </label>
+
+                    <label class="radio-card-label">
+                      <input type="radio" name="instanceProfile" value="compute">
+                      <span class="radio-card-text">
+                        <span class="radio-card-title">Compute Optimized</span>
+                        <span class="radio-card-desc">8 vCPU · 16 GB RAM</span>
+                      </span>
+                    </label>
+
+                    <label class="radio-card-label">
+                      <input type="radio" name="instanceProfile" value="memory">
+                      <span class="radio-card-text">
+                        <span class="radio-card-title">Memory Optimized</span>
+                        <span class="radio-card-desc">4 vCPU · 32 GB RAM</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="node-count-input" class="form-label">
+                    Minimum Auto-Scaling Nodes (Count) <span class="required-indicator" aria-hidden="true">*</span>
+                  </label>
+                  <div id="node-count-helper" class="form-helper-text">
+                    Specify between 3 and 50 nodes per availability zone.
+                  </div>
+                  <input
+                    type="number"
+                    id="node-count-input"
+                    name="nodeCount"
+                    class="form-control-input"
+                    min="3"
+                    max="50"
+                    value="3"
+                    required
+                    aria-describedby="node-count-helper"
+                    aria-required="true"
+                  >
+                </div>
+              </fieldset>
+
+              <!-- Fieldset 3: Security & Governance Policies -->
+              <fieldset class="accessible-fieldset">
+                <legend class="accessible-legend">3. Security &amp; Compliance Policies</legend>
+
+                <div class="switch-control-row">
+                  <div>
+                    <label for="switch-tls" class="form-label form-label-compact">
+                      Enforce Mutual TLS (mTLS) Encryption
+                    </label>
+                    <div class="form-helper-text">
+                      Require cryptographic x509 service-to-service certificates on all ingress gateways.
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="switch-btn"
+                    id="switch-tls"
+                    role="switch"
+                    aria-checked="true"
+                    aria-label="Enforce Mutual TLS Encryption"
+                  ></button>
+                </div>
+
+                <div class="switch-control-row">
+                  <div>
+                    <label for="switch-waf" class="form-label form-label-compact">
+                      Enable Web Application Firewall (WAF)
+                    </label>
+                    <div class="form-helper-text">
+                      Inspect traffic against OWASP Top 10 vulnerabilities and automated DDoS bots.
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    class="switch-btn"
+                    id="switch-waf"
+                    role="switch"
+                    aria-checked="true"
+                    aria-label="Enable Web Application Firewall"
+                  ></button>
+                </div>
+
+                <div class="form-group form-group-spaced">
+                  <label for="admin-notes-textarea" class="form-label">
+                    Deployment Intent &amp; Change Request Ticket
+                  </label>
+                  <div id="notes-helper" class="form-helper-text">
+                    Record justification, RFC change ticket number, and escalation contact.
+                  </div>
+                  <textarea
+                    id="admin-notes-textarea"
+                    name="adminNotes"
+                    class="form-control-textarea"
+                    rows="3"
+                    placeholder="e.g. RFC-2026-9941: Capacity scale for Q4 ecommerce load test."
+                    aria-describedby="notes-helper"
+                  ></textarea>
+                </div>
+              </fieldset>
+
+              <div class="form-actions-row">
+                <button type="reset" class="btn-secondary">
+                  Reset Form
+                </button>
+                <button type="submit" class="btn-primary" id="submit-cluster-btn">
+                  <span>✓ Provision Cluster</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <!-- ====================================================================
+           4. ACCESSIBLE MODAL DIALOG (<dialog>)
+           ==================================================================== -->
+      <dialog
+        id="modal-provision"
+        class="accessible-dialog"
+        aria-labelledby="dialog-heading"
+        aria-describedby="dialog-description"
+      >
+        <div class="dialog-header">
+          <h2 id="dialog-heading" class="dialog-title">Quick Deploy Micro-Node</h2>
+          <button
+            type="button"
+            class="dialog-close-btn"
+            id="modal-close-x"
+            aria-label="Close modal dialog"
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="dialog-body">
+          <p id="dialog-description" class="form-helper-text dialog-desc-text">
+            Instantly spin up a pre-configured micro-compute instance attached to the primary VPC mesh.
+          </p>
+
+          <form id="quick-deploy-form" method="dialog">
+            <div class="form-group">
+              <label for="quick-node-name" class="form-label">
+                Instance Tag Identifier <span class="required-indicator" aria-hidden="true">*</span>
+              </label>
+              <input
+                type="text"
+                id="quick-node-name"
+                class="form-control-input"
+                placeholder="e.g. worker-edge-01"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="quick-role-select" class="form-label">
+                Workload Role <span class="required-indicator" aria-hidden="true">*</span>
+              </label>
+              <select id="quick-role-select" class="form-control-select" required>
+                <option value="api">Stateless Web / API Gateway</option>
+                <option value="worker">Background Queue Worker</option>
+                <option value="cache">Distributed In-Memory Cache</option>
+              </select>
+            </div>
+
+            <div class="dialog-footer">
+              <button
+                type="button"
+                class="btn-secondary"
+                id="modal-cancel-btn"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="btn-primary"
+                id="modal-confirm-btn"
+              >
+                Deploy Instance
+              </button>
+            </div>
+          </form>
+        </div>
+      </dialog>
+
+      <!-- ====================================================================
+           5. SEMANTIC FOOTER (<footer>)
+           ==================================================================== -->
+      <footer class="site-footer">
+        <div>
+          &copy; 2026 Apex Cloud Enterprise Systems Inc. All rights reserved.
+        </div>
+
+        <ul class="footer-nav">
+          <li><a href="#main">Accessibility Statement (WCAG 2.1 AA)</a></li>
+          <li><a href="#main">SOC-2 Security Compliance</a></li>
+          <li><a href="#main">Privacy Policy</a></li>
+          <li><a href="#main">API Documentation</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <!-- JavaScript Controller -->
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>
